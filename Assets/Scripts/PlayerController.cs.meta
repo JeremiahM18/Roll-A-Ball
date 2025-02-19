@@ -1,2 +1,18 @@
 fileFormatVersion: 2
 guid: de9738cd22b4ac844a2c1a32f2930243
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - countText: {instanceID: 0}
+  - winTextObject: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - collectSound: {instanceID: 0}
+  - loseSound: {instanceID: 0}
+  - winSound: {instanceID: 0}
+  - wallCollisionSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

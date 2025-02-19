@@ -14,6 +14,13 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
 
+    // Audio Variables
+    public AudioSource audioSource;
+    public AudioClip collectSound;
+    public AudioClip loseSound;
+    public AudioClip winSound;
+    public AudioClip wallCollisionSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,8 +45,12 @@ public class PlayerController : MonoBehaviour
         if (count >= 16)
         {
             winTextObject.SetActive (true);
-
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            
+            if(audioSource && winSound)
+            {
+                audioSource.PlayOneShot(winSound);
+            }
 
         }
     }
@@ -47,7 +58,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
         rb.AddForce(movement * speed);
     }
 
@@ -55,10 +65,31 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            rb.linearVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            GetComponent<Collider>().enabled = false;
 
             winTextObject.gameObject.SetActive(true);
             winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+
+            if (audioSource && loseSound)
+            {
+                audioSource.PlayOneShot(loseSound);
+                Destroy(gameObject, loseSound.length);
+            }
+            else
+            {
+                Destroy(gameObject);
+
+            }
+
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            if (audioSource && wallCollisionSound)
+            {
+                audioSource.PlayOneShot(wallCollisionSound);
+            }
         }
     }
 
@@ -68,8 +99,12 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             count += 1;
-
             SetCountText() ;
+
+            if(audioSource && collectSound)
+            {
+                audioSource.PlayOneShot(collectSound);
+            }
         }
     }
 }
