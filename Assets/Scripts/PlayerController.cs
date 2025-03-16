@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public GameObject loseTextObject;
 
     private Rigidbody rb;
     private int count;
@@ -21,6 +22,11 @@ public class PlayerController : MonoBehaviour
     public AudioClip winSound;
     public AudioClip wallCollisionSound;
 
+    // Particle System
+    public ParticleSystem collectEffect;
+    public ParticleSystem explosionEffect;
+    public ScreenShake screenShake;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,12 +35,12 @@ public class PlayerController : MonoBehaviour
 
         SetCountText();
         winTextObject.SetActive(false);
+        loseTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
-
         movementX = movementVector.x;
         movementY = movementVector.y;
     }
@@ -65,29 +71,35 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            // Stop movement and disable collider
             rb.linearVelocity = Vector3.zero;
             rb.isKinematic = true;
             GetComponent<Collider>().enabled = false;
 
-            winTextObject.gameObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+
+            if (screenShake != null)
+            {
+                StartCoroutine(screenShake.Shake(0.3f, 0.2f));
+            }
+
+            // Display Lose message and play audio
+            //winTextObject.gameObject.SetActive(true);
+            //winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            loseTextObject.SetActive(true);
 
             if (audioSource && loseSound)
             {
                 audioSource.PlayOneShot(loseSound);
-                Destroy(gameObject, loseSound.length);
-            }
-            else
-            {
-                Destroy(gameObject);
-
+                //Destroy(gameObject, loseSound.length);
             }
 
+            GetComponent<MeshRenderer>().enabled = false;
+            this.enabled = false;
         }
         else if (collision.gameObject.CompareTag("Wall"))
         {
-            if (audioSource && wallCollisionSound)
-            {
+            if(audioSource && wallCollisionSound) {
                 audioSource.PlayOneShot(wallCollisionSound);
             }
         }
@@ -97,9 +109,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
+            // Spawn particle effect at the pickup's position
+            Instantiate(collectEffect, other.transform.position, Quaternion.identity);
             other.gameObject.SetActive(false);
             count += 1;
-            SetCountText() ;
+            SetCountText();
 
             if(audioSource && collectSound)
             {
