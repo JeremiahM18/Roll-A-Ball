@@ -76,7 +76,10 @@ public class PlayerController : MonoBehaviour
             rb.isKinematic = true;
             GetComponent<Collider>().enabled = false;
 
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            ParticleSystem dEffect = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            dEffect.Play();
+
+            Destroy(dEffect.gameObject, dEffect.main.duration + dEffect.main.startLifetime.constantMax);
 
             if (screenShake != null)
             {
@@ -110,7 +113,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             // Spawn particle effect at the pickup's position
-            Instantiate(collectEffect, other.transform.position, Quaternion.identity);
+            ParticleSystem effect = Instantiate(collectEffect, other.transform.position, Quaternion.identity);
+
+           effect.Play();
+
+            Destroy(effect.gameObject, effect.main.duration + effect.main.startLifetime.constantMax);
+
             other.gameObject.SetActive(false);
             count += 1;
             SetCountText();
