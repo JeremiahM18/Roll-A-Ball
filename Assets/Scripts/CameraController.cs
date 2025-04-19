@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour
 
     public GameObject player;
     private Vector3 offset;
+    private bool isFollowing = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,10 +19,15 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (player != null)
+        if (player != null && isFollowing)
         {
             Vector3 targetPosition = player.transform.position + offset;
             transform.position = Vector3.Lerp(transform.position, targetPosition, 0.1f);
         }
+    }
+
+    public void StopFollowing()
+    {
+        isFollowing = false;
     }
 }

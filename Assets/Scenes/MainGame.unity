@@ -10136,7 +10136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &331710486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10280,7 +10280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &553311157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10960,6 +10960,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b22ffc94193054293daaf5bc7190ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1002097126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1002097128}
+  - component: {fileID: 1002097127}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1002097127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002097126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba8d703268b4d64a90837eb72ef26dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 6078013579671599897, guid: 3092d72e69b58804690ebe44fe232071, type: 3}
+  spawnInterval: 5
+  spawnAreaSize: {x: 20, y: 0, z: 20}
+  player: {fileID: 1209369022}
+--- !u!4 &1002097128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002097126}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.63, y: 1.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1065074064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11017,6 +11065,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0108d514e7323743b585cd24e8dc674, type: 3}
+--- !u!1 &1102067926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1102067928}
+  - component: {fileID: 1102067927}
+  m_Layer: 0
+  m_Name: HeartSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1102067927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102067926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8101613e22a23b498ef8b596afff224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartPrefab: {fileID: 7808999295334670804, guid: c67aced6f70f8d848aebd807b6527122, type: 3}
+  spawnInterval: 10
+  spawnAreaSize: {x: 20, y: 1, z: 20}
+--- !u!4 &1102067928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102067926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.63, y: 1.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103444985
 GameObject:
   m_ObjectHideFlags: 0
@@ -11508,7 +11603,7 @@ GameObject:
   - component: {fileID: 1209369026}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11739,6 +11834,8 @@ MonoBehaviour:
   collectEffect: {fileID: 1654139540}
   explosionEffect: {fileID: 1599738441}
   screenShake: {fileID: 961739755}
+  lifeCount: 3
+  lifeIcon: []
 --- !u!82 &1209369024
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12815,7 +12912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1507747409
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23894,7 +23991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4478270644684670388, guid: b0e0118fc72b5da41880151ab35d26a1, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7911403490425757199, guid: b0e0118fc72b5da41880151ab35d26a1, type: 3}
       propertyPath: m_Enabled
@@ -23928,3 +24025,5 @@ SceneRoots:
   - {fileID: 53222324}
   - {fileID: 218070919}
   - {fileID: 1334328025}
+  - {fileID: 1102067928}
+  - {fileID: 1002097128}
