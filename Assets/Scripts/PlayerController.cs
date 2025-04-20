@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
@@ -75,6 +75,8 @@ public class PlayerController : MonoBehaviour
                 audioSource.PlayOneShot(winSound);
             }
 
+            StartCoroutine(LoadGameOver());
+
         }
     }
 
@@ -129,6 +131,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+
+    private IEnumerator LoadGameOver()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("GameOver");
     }
 
     #region Health & Recover
@@ -232,7 +240,9 @@ public class PlayerController : MonoBehaviour
             audioSource.PlayOneShot(loseSound);
         }
 
-        yield return null;
+        yield return new WaitForSeconds(2f);
+
+        SceneManager.LoadScene("GameOver");
     }
 
     private void PlaySound(int soundType)
